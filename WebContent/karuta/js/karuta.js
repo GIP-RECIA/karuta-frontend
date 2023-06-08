@@ -949,7 +949,7 @@ function reloadPage() {
 
 
 //==================================
-function previewPage(uuid,depth,type,langcode,edit) 
+function previewPage(uuid,depth,type,langcode,edit,reload) 
 //==================================
 {
 	//---------------------
@@ -979,7 +979,10 @@ function previewPage(uuid,depth,type,langcode,edit)
 	previewwindow.innerHTML =  previewBox(uuid);
 	$('body').append(previewwindow);
 	$("#preview-"+uuid).hide();
-	var header = "<button class='btn add-button' style='float:right' onclick=\"$('#preview-"+uuid+"').remove();$('#previewbackdrop-"+uuid+"').remove();\">"+karutaStr[LANG]['Close']+"</button>";
+	var header = "<button class='btn add-button' style='float:right' onclick=\"$('#preview-"+uuid+"').remove();$('#previewbackdrop-"+uuid+"').remove();";
+	if (reload!=null && reload)
+		header += "reloadPage();"
+	header +="\">"+karutaStr[LANG]['Close']+"</button>";
 	$("#preview-window-header-"+uuid).html(header);
 	$("#preview-window-body-"+uuid).html("");
 	let url = serverBCK_API+"/nodes/node/" + uuid + "?resources=true";
@@ -1012,7 +1015,7 @@ function previewPage(uuid,depth,type,langcode,edit)
 	});
 }
 //==================================
-function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit) 
+function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit,reload) 
 //==================================
 {
 	if (partialcode!=undefined && semtag!=undefined) {
@@ -1028,7 +1031,7 @@ function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit)
 			url : serverBCK_API+"/nodes?portfoliocode=" + portfoliocode + "&semtag="+semtag,
 			success : function(data) {
 				const uuid = $("node",data).attr("id");
-				previewPage(uuid,depth,type,langcode,edit) ;
+				previewPage(uuid,depth,type,langcode,edit,reload) ;
 			}
 		});
 	}
@@ -1694,9 +1697,13 @@ function sendEmailPublicURL(encodeddata,email,langcode) {
 	//------------------------------
 
 	var img = document.querySelector('#config-send-email-logo');
-	var imgB64 = getDataUrl(img);
-	var logo = "<img width='"+img.style.width+"' height='"+img.style.height+"' src=\""+imgB64+"\">";
-	message = logo + "<br>" + g_configVar['send-email-message'];
+	if (img!=null) {
+		var imgB64 = getDataUrl(img);
+		var logo = "<img width='"+img.style.width+"' height='"+img.style.height+"' src=\""+imgB64+"\">";
+		message = logo + "<br>" + g_configVar['send-email-message'];
+	} else {
+		message = g_configVar['send-email-message'];
+	}
 	message = message.replace("##firstname##",USER.firstname);
 	message = message.replace("##lastname##",USER.lastname);
 	const urlhtml = g_configVar['send-email-url']==""?g_configVar['send-email-image']:g_configVar['send-email-url']
@@ -3849,6 +3856,11 @@ function setPageVisited(uuid,role) {
 		UICom.structure.ui[visitedid].resource.save();
 	}
 }
+
+function removeContentNode(nodeid){
+	$("#content-"+nodeid).remove();
+}
+
 //================================================
 //================================================
 //============== Function JQuery =================
