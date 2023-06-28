@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/karutaproject/karuta-frontend.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/karutaproject/karuta-frontend.git</developerConnection>
-        <url>https://github.com/karutaproject/karuta-frontend.git</url>
+        <connection>scm:git:ssh://git@github.com/avenirs-esr/karuta-frontend.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/avenirs-esr/karuta-frontend.git</developerConnection>
+        <url>https://github.com/avenirs-esr/karuta-frontend.git</url>
         <tag>HEAD</tag>
     </scm>
 
