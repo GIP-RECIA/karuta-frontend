@@ -233,7 +233,7 @@ function displayKarutaLogin()
 		url : serverBCK_API+"/credential/login",
 		data: data,
 		success : function(data) {
-			constructKarutaLogin(true);
+			constructKarutaLogin(true && localLogin);
 		},
 		error : function(jqxhr,textStatus) {
 			if (jqxhr.status == '404') {
