@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.eportfolium.karuta</groupId>
     <artifactId>karuta-frontend</artifactId>
-    <version>3.4.0-SNAPSHOT</version>
+    <version>3.4.0</version>
     <packaging>war</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>The frontend part of the Karuta project</description>
@@ -32,7 +32,7 @@
         <connection>scm:git:ssh://git@github.com/avenirs-esr/karuta-frontend.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/avenirs-esr/karuta-frontend.git</developerConnection>
         <url>https://github.com/avenirs-esr/karuta-frontend.git</url>
-        <tag>HEAD</tag>
+        <tag>3.4.0</tag>
     </scm>
 
     <distributionManagement>
