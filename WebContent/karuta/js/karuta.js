@@ -939,10 +939,10 @@ function reloadPreviewBox(node)
 function reloadPreviewPage() {
 	let previewpageid = $(".preview-window").attr('preview-uuid');
 	if (previewpageid!=undefined) {
-	$('#preview-'+previewpageid).remove();
-	$('#previewbackdrop-'+previewpageid).remove();
-	previewPage(previewpageid,100,"",null,g_report_edit); 
-}
+		$('#preview-'+previewpageid).remove();
+		$('#previewbackdrop-'+previewpageid).remove();
+		previewPage(previewpageid,100,"",null,g_report_edit);
+	}
 }
 
 //=====================================================
@@ -950,72 +950,73 @@ function reloadPage() {
 	UIFactory.Node.reloadUnit();
 }
 
+
 //==================================
 function previewPage(uuid,depth,type,langcode,edit,reload) 
 //==================================
 {
 	if (uuid!=null) {
-	//---------------------
-	if (langcode==null)
-		langcode = LANGCODE;
-	//---------------------
-	if (type=='previewURL') {
+		//---------------------
+		if (langcode==null)
+			langcode = LANGCODE;
+		//---------------------
+		if (type=='previewURL') {
+			$.ajax({
+				async:false,
+				type : "GET",
+				url : serverBCK+"/direct?i=" + uuid,
+				success : function(data) {
+					uuid = data;
+				}
+			});
+		}
+		var previewbackdrop = document.createElement("DIV");
+		previewbackdrop.setAttribute("class", "preview-backdrop");
+		previewbackdrop.setAttribute("id", "previewbackdrop-"+uuid);
+		$('body').append(previewbackdrop);
+	
+		var previewwindow = document.createElement("DIV");
+		previewwindow.setAttribute("id", "preview-"+uuid);
+		previewwindow.setAttribute("class", "preview-window");
+		previewwindow.setAttribute("preview-uuid", uuid);
+		previewwindow.setAttribute("preview-edit", edit);
+		previewwindow.innerHTML =  previewBox(uuid);
+		$('body').append(previewwindow);
+		$("#preview-"+uuid).hide();
+		var header = "<button class='btn add-button' style='float:right' onclick=\"$('#preview-"+uuid+"').remove();$('#previewbackdrop-"+uuid+"').remove();";
+		if (reload!=null && reload)
+			header += "reloadPage();"
+		header +="\">"+karutaStr[LANG]['Close']+"</button>";
+		$("#preview-window-header-"+uuid).html(header);
+		$("#preview-window-body-"+uuid).html("");
+		let url = serverBCK_API+"/nodes/node/" + uuid + "?resources=true";
 		$.ajax({
 			async:false,
 			type : "GET",
-			url : serverBCK+"/direct?i=" + uuid,
+			dataType : "xml",
+			url : url,
 			success : function(data) {
-				uuid = data;
+				UICom.parseStructure(data,false);
+				setVariables(data);
+				if (edit==null)
+					g_report_edit = false;
+				else
+					g_report_edit = edit;
+				UICom.structure["ui"][uuid].displayNode('standard',UICom.structure['tree'][uuid],"preview-window-body-"+uuid,depth,langcode,g_report_edit);
+				g_report_edit = g_edit;
+				$("#preview-"+uuid).show();
+				$("#previewbackdrop-"+uuid).show();
+				window.scrollTo(0,0);
+			},
+			error : function() {
+				var html = "";
+				html += "<div style='margin:50px'>" + karutaStr[languages[langcode]]['error-notfound'] + "</div>";
+				$("#preview-window-body-"+uuid).html(html);
+				$("#previewbackdrop-"+uuid).show();
+				$("#preview-"+uuid).show();
+				window.scrollTo(0,0);
 			}
 		});
-	}
-	var previewbackdrop = document.createElement("DIV");
-	previewbackdrop.setAttribute("class", "preview-backdrop");
-	previewbackdrop.setAttribute("id", "previewbackdrop-"+uuid);
-	$('body').append(previewbackdrop);
-
-	var previewwindow = document.createElement("DIV");
-	previewwindow.setAttribute("id", "preview-"+uuid);
-	previewwindow.setAttribute("class", "preview-window");
-	previewwindow.setAttribute("preview-uuid", uuid);
-	previewwindow.setAttribute("preview-edit", edit);
-	previewwindow.innerHTML =  previewBox(uuid);
-	$('body').append(previewwindow);
-	$("#preview-"+uuid).hide();
-	var header = "<button class='btn add-button' style='float:right' onclick=\"$('#preview-"+uuid+"').remove();$('#previewbackdrop-"+uuid+"').remove();";
-	if (reload!=null && reload)
-		header += "reloadPage();"
-	header +="\">"+karutaStr[LANG]['Close']+"</button>";
-	$("#preview-window-header-"+uuid).html(header);
-	$("#preview-window-body-"+uuid).html("");
-	let url = serverBCK_API+"/nodes/node/" + uuid + "?resources=true";
-	$.ajax({
-		async:false,
-		type : "GET",
-		dataType : "xml",
-		url : url,
-		success : function(data) {
-			UICom.parseStructure(data,false);
-			setVariables(data);
-			if (edit==null)
-				g_report_edit = false;
-			else
-				g_report_edit = edit;
-			UICom.structure["ui"][uuid].displayNode('standard',UICom.structure['tree'][uuid],"preview-window-body-"+uuid,depth,langcode,g_report_edit);
-			g_report_edit = g_edit;
-			$("#preview-"+uuid).show();
-			$("#previewbackdrop-"+uuid).show();
-			window.scrollTo(0,0);
-		},
-		error : function() {
-			var html = "";
-			html += "<div style='margin:50px'>" + karutaStr[languages[langcode]]['error-notfound'] + "</div>";
-			$("#preview-window-body-"+uuid).html(html);
-			$("#previewbackdrop-"+uuid).show();
-			$("#preview-"+uuid).show();
-			window.scrollTo(0,0);
-		}
-	});
 	}
 }
 
@@ -1856,9 +1857,9 @@ function sendEmailPublicURL(encodeddata,email,langcode) {
 
 	var img = document.querySelector('#config-send-email-logo');
 	if (img!=null) {
-	var imgB64 = getDataUrl(img);
-	var logo = "<img width='"+img.style.width+"' height='"+img.style.height+"' src=\""+imgB64+"\">";
-	message = logo + "<br>" + g_configVar['send-email-message'];
+		var imgB64 = getDataUrl(img);
+		var logo = "<img width='"+img.style.width+"' height='"+img.style.height+"' src=\""+imgB64+"\">";
+		message = logo + "<br>" + g_configVar['send-email-message'];
 	} else {
 		message = g_configVar['send-email-message'];
 	}
@@ -3517,6 +3518,7 @@ function pageClick (nodeid)
 	}
 }
 
+
 //=========================================================
 //==================API Vector Functions===================
 //=========================================================
@@ -4014,9 +4016,11 @@ function setPageVisited(uuid,role) {
 		UICom.structure.ui[visitedid].resource.save();
 	}
 }
+
 function removeContentNode(nodeid){
 	$("#content-"+nodeid).remove();
 }
+
 //================================================
 //================================================
 //============== Function JQuery =================
