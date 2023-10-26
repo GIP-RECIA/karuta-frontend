@@ -288,7 +288,7 @@ function constructKarutaLogin(withKarutaLogin)
 	$("#useridentifier").focus();
 	if (typeof cas_url != 'undefined' && cas_url!="")
 		$("#connection-cas").show();
-	if (typeof openid != 'undefined' && openid_url!="")
+	if (typeof openid_url != 'undefined' && openid_url!="")
 		$("#connection-openid").show();
 	if (!withKarutaLogin)
 		g_configVar['login-new-password-display'] = '0';
