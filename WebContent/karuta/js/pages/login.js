@@ -120,7 +120,7 @@ function callLoginCode()
 				alertHTML(karutaStr[LANG]['code-sent']);
 				let html = "";
 				html += "	<input id='password' class='form-control' placeholder=\""+karutaStr[LANG]['code']+"\" type='text' autocomplete='off''>";
-				html += "	<button class='button-login' onclick=\"javascript:callSubmit('"+encrypt_url+"','"+lang+"')\">"+karutaStr[LANG]['login']+"</button>";	
+				html += "	<button class='button-login' onclick=\"javascript:callSubmit('"+encrypt_url+"','"+lang+"')\">"+karutaStr[LANG]['login']+"</button>";
 				$("#ask-login").hide();
 				$("#ask-code").html(html);
 			},
@@ -303,10 +303,10 @@ function constructKarutaLogin(withKarutaLogin)
 			karuta_backend_version = data.version;
 			karuta_backend_date = data.buildTime;
 		},
-		error: function(data) {
+		error: function(request, status, error) {
+			console.log("Can't obtain backend version: ", request.responseText);
 		}
 	});
-/*
  	$.ajax({
 		type : "GET",
 		dataType : "json",
@@ -316,10 +316,10 @@ function constructKarutaLogin(withKarutaLogin)
 			karuta_fileserver_version = data.version;
 			karuta_fileserver_date = data.buildTime;
 		},
-		error: function(data) {
+		error: function(request, status, error) {
+			console.log("Can't obtain fileserver version: ", request.responseText);
 		}
 	});
-*/
 	try {
 		specificLoginFunction();
 	} catch(e) {
