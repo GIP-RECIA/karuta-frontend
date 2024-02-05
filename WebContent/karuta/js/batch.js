@@ -645,7 +645,7 @@ g_actions['create-user'] = function createUser(node)
 					$("#batch-log").append("<br>- user updated("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 				},
 				error : function(data) {
-					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 1</span> in create/update-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);					
+					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 1</span> in create/update-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 				}
 			});
 			},
@@ -675,11 +675,13 @@ g_actions['create-user'] = function createUser(node)
 				data : xml,
 				success : function(data) {
 					userid = data;
+					if (userid="")
+						$("#batch-log").append("<br>- ***<span class='danger'>ERROR 2</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 					ok = true;
 					$("#batch-log").append("<br>- user created("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 				},
 				error : function(data) {
-					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 2</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);					
+					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 3</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 				}
 			});
 		}
