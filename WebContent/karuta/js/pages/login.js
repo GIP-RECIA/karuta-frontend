@@ -42,8 +42,12 @@ function callSubmit(encrypt_url,lang)
 				window.location="karuta.htm";
 			else if (self.encrypt_url.length==36)
 				window.location="karuta.htm?i="+self.encrypt_url+"&lang="+self.lang
-			else
-				window.location="public.htm?i="+self.encrypt_url+"&lang="+self.lang
+			else {
+				if (x!=undefined)
+					window.location="public.htm?i="+self.encrypt_url+"&x="+x+"&lang="+self.lang
+				else
+					window.location="public.htm?i="+self.encrypt_url+"&lang="+self.lang;
+			}
 		},
 		error : function(jqxhr,textStatus) {
 			alertHTML(karutaStr[LANG]['error-login']);
@@ -345,6 +349,7 @@ var lang = getURLParameter('lang');
 if (lang==null)
 	lang = "" ;
 //-------------------------------
+var x = getURLParameter('x');
 
 //==============================
 function applyLoginConfiguration()
