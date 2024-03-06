@@ -240,7 +240,7 @@ function getNavBar(type,portfolioid,edit)
 				html += "		<a class='nav-link' href='"+window.location+"' target='_blank' data-title='"+karutaStr[LANG]["button-new-window"]+"' data-toggle='tooltip' data-placement='bottom'><i class='far fa-clone'></i></a>";
 				html += "	</li>";
 			}
-		}
+		} 
 		html += "			</ul>";
 		html += "<ul class='navbar-nav'>";
 		html += "	<li class='nav-item icon'>";
@@ -409,7 +409,7 @@ function getEditBox(uuid,js2) {
 				$("#//-window-body").html(html);
 				$("#preview-window").modal('show');
 			}
-		});
+		});		
 	}
 	if(UICom.structure.ui[uuid].resource!=null && (UICom.structure.ui[uuid].editresroles.containsArrayElt(g_userroles) || UICom.structure.ui[uuid].editresroles.indexOf($(USER.username_node).text())>-1 || g_userroles[0]=='designer')) {
 		try {
@@ -607,7 +607,7 @@ function imageBox()
 }
 
 //=======================================================================
-function deleteandhidewindow(uuid,type,parentid,destid,callback,param1,param2,param3,param4)
+function deleteandhidewindow(uuid,type,parentid,destid,callback,param1,param2,param3,param4) 
 // =======================================================================
 {
 	$('#delete-window').modal('hide');
@@ -628,20 +628,20 @@ function deleteandhidewindow(uuid,type,parentid,destid,callback,param1,param2,pa
 }
 
 //=======================================================================
-function confirmSubmit(uuid,submitall,js1,text,js2)
+function confirmSubmit(uuid,submitall,js1,text,js2) 
 // =======================================================================
 {
 	if (js1==null || js1==undefined)
 		js1 = "";
 	if (js1!="" && js1.indexOf('(')<0)
 		js1 = js1 + "('" + uuid + "')";
-	else
+	else 
 		js1 = replaceVariable(js1);
 	if (js2==null || js2==undefined)
 		js2 = "";
 	if (js2!="" && js2.indexOf('(')<0)
 		js2 = js2 + "('" + uuid + "')";
-	else
+	else 
 		js2 = replaceVariable(js2);
 	var href = "";
 	var type = "";
@@ -665,7 +665,7 @@ function confirmSubmit(uuid,submitall,js1,text,js2)
 }
 
 //=======================================================================
-function confirmDel(uuid,type,parentid,destid,callback,param1,param2,param3,param4)
+function confirmDel(uuid,type,parentid,destid,callback,param1,param2,param3,param4) 
 // =======================================================================
 {
 	document.getElementById('delete-window-body').innerHTML = karutaStr[LANG]["confirm-delete"];
@@ -676,7 +676,7 @@ function confirmDel(uuid,type,parentid,destid,callback,param1,param2,param3,para
 }
 
 //=======================================================================
-function confirmDelObject(id,type)
+function confirmDelObject(id,type) 
 // =======================================================================
 {
 	document.getElementById('delete-window-body').innerHTML = karutaStr[LANG]["confirm-delete"];
@@ -687,7 +687,7 @@ function confirmDelObject(id,type)
 }
 
 //=======================================================================
-function confirmDelete(js)
+function confirmDelete(js) 
 // =======================================================================
 {
 	document.getElementById('delete-window-body').innerHTML = karutaStr[LANG]["confirm-delete"];
@@ -819,7 +819,7 @@ function displayPage(uuid,depth,type,langcode) {
 	if (langcode==null)
 		langcode = LANGCODE;
 	//---------------------
-	var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	var scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
 	var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 	if (g_current_page!=uuid) {
 		$(window).scrollTop(0);
@@ -827,7 +827,7 @@ function displayPage(uuid,depth,type,langcode) {
 		scrollLeft = 0;
 		g_current_page = uuid;
 	}
-
+	
 	//---------------------
 	$("#contenu").html("<div id='page' uuid='"+uuid+"'></div>");
 	$('.selected').removeClass('selected');
@@ -908,7 +908,7 @@ function displayPage(uuid,depth,type,langcode) {
 }
 
 //==================================
-function reloadPreviewBox(node)
+function reloadPreviewBox(node) 
 //==================================
 {
 	const uuid = $(node).attr("preview-uuid");
@@ -951,7 +951,7 @@ function reloadPage() {
 
 
 //==================================
-function previewPage(uuid,depth,type,langcode,edit,reload)
+function previewPage(uuid,depth,type,langcode,edit,reload) 
 //==================================
 {
 	if (uuid!=null) {
@@ -973,7 +973,7 @@ function previewPage(uuid,depth,type,langcode,edit,reload)
 		previewbackdrop.setAttribute("class", "preview-backdrop");
 		previewbackdrop.setAttribute("id", "previewbackdrop-"+uuid);
 		$('body').append(previewbackdrop);
-
+	
 		var previewwindow = document.createElement("DIV");
 		previewwindow.setAttribute("id", "preview-"+uuid);
 		previewwindow.setAttribute("class", "preview-window");
@@ -1020,7 +1020,7 @@ function previewPage(uuid,depth,type,langcode,edit,reload)
 }
 
 //==================================
-function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit,reload)
+function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit,reload) 
 //==================================
 {
 	if (partialcode!=undefined && semtag!=undefined) {
@@ -1043,7 +1043,7 @@ function previewPortfolioPage(partialcode,semtag,depth,type,langcode,edit,reload
 }
 
 //==================================
-function previewPortfolio(uuid,langcode,edit,reload,type)
+function previewPortfolio(uuid,langcode,edit,reload,type) 
 //==================================
 {
 	if (uuid!=null) {
@@ -1065,7 +1065,7 @@ function previewPortfolio(uuid,langcode,edit,reload,type)
 		previewbackdrop.setAttribute("class", "preview-backdrop");
 		previewbackdrop.setAttribute("id", "previewbackdrop-"+uuid);
 		$('body').append(previewbackdrop);
-
+	
 		var previewwindow = document.createElement("DIV");
 		previewwindow.setAttribute("id", "preview-"+uuid);
 		previewwindow.setAttribute("class", "preview-window");
@@ -1105,20 +1105,6 @@ function previewPortfolio(uuid,langcode,edit,reload,type)
 						cssfile += ".css";
 					$('<link/>', { rel: 'stylesheet', type: 'text/css', href: '../../application/css/'+cssfile}).appendTo('head');
 				}
-				//-------------------------------------------------
-				/*
-				 * var config_unit = $("asmUnit:has(metadata[semantictag*='configuration-unit'])",data);
-				if (config_unit.length==0) { // for backward compatibility and portfolios without config
-//					if (g_configDefaultVar.length>0)
-						resetConfigurationPortfolioVariable();
-//					setCSSportfolio("");
-					setCSSportfolioOLD(data);
-				} else {
-					setConfigurationPortfolioVariable(config_unit,true);
-					setCSSportfolio(config_unit);
-				}
-				setVariables(data);
-				*/
 				// --------------------------
 				if (g_display_type=="standard" || g_display_type=="raw") {
 					if (USER.creator)
@@ -1133,9 +1119,6 @@ function previewPortfolio(uuid,langcode,edit,reload,type)
 				} else if (g_display_type=="model" || g_display_type=="translate") {
 					g_edit = true;
 				}
-				//$("#preview-window-body-sub-bar-"+uuid).html(UIFactory.Portfolio.getNavBar(g_display_type,LANGCODE,g_edit,uuid));
-				//-------------- DEFAULT_ROLE -------------
-				//$("#preview-window-body-portfolio-container").attr('role',g_userroles[0]);
 				//-------------------------------------------------
 				UIFactory.Portfolio.displayPortfolio('preview-window-body-portfolio-container-'+uuid,g_display_type,LANGCODE,g_edit);
 				// --------------------------
@@ -1168,10 +1151,8 @@ function previewPortfolio(uuid,langcode,edit,reload,type)
 					var rootid = $(root[0]).attr('id');
 					$("#sidebar_"+rootid).click();
 				}
-				//---------------------------
-				//fillEditBoxBody();
 				//=====================================================
-				$('[data-toggle=tooltip]').tooltip({html: true, trigger: 'hover'});
+				$('[data-toggle=tooltip]').tooltip({html: true, trigger: 'hover'}); 
 				$(document).click(function(e) {
 					if (!$(e.target).is('.tooltip')) {
 						$('.tooltip').hide();
@@ -1185,7 +1166,7 @@ function previewPortfolio(uuid,langcode,edit,reload,type)
 			error : function(jqxhr,textStatus) {
 				if (jqxhr.status=="403")
 					alertHTML("Sorry. A problem occurs : no right to see this portfolio (" + g_portfolioid + ")");
-
+				
 				else {
 					alertHTML("<h4>Error in fill_main_page</h4><h5>responseText</h5><p>"+jqxhr.responseText+"</p><h5>textStatus</h5><p>"+textStatus+"<h5>status</h5><p>"+jqxhr.status);
 					}
@@ -1262,7 +1243,7 @@ function importComponent(parentid,targetid,srce,part_semtag,fctjs)
 };
 
 //=======================================================================
-function importBranch(destid,srcecode,srcetag,databack,callback,param2,param3,param4,param5,param6,param7,param8)
+function importBranch(destid,srcecode,srcetag,databack,callback,param2,param3,param4,param5,param6,param7,param8) 
 //=======================================================================
 // if srcetag does not exist as semantictag search as code
 {
@@ -1378,7 +1359,7 @@ function submit(uuid,submitall)
 			} else
 				UIFactory.Node.reloadUnit();
 		}
-	});
+	}); 
 }
 
 //=======================================================================
@@ -1397,7 +1378,7 @@ function reset(uuid)
 			if ( $(".preview-window").length>0) {
 				$(".preview-window").remove();
 				$(".preview-backdrop").remove();
-			} else
+			} else 
 			UIFactory.Node.reloadUnit();
 		}
 	});
@@ -1505,13 +1486,13 @@ Set.prototype.asArray = function() {
 };
 
 //==================================
-function encrypt(text,key){
+function encrypt(text,key){  
 	//==================================
     var result = $.rc4EncryptStr(text,key);
 	return result;
-}
+}  
 //==================================
-function decrypt(text,key){
+function decrypt(text,key){  
 //==================================
 	var result = "";
 	try {
@@ -1521,7 +1502,7 @@ function decrypt(text,key){
 		result = karutaStr[LANG]['error_rc4key'];
 	}
 		return result;
-	}
+	}  
 
 //==================================
 function sortOn1(a,b)
@@ -1701,7 +1682,7 @@ function getPublicURL(uuid,email,sharerole,role,level,duration,langcode) {
 	if (level==null)
 		level = 4; //public
 	if (duration==null)
-		duration = 'unlimited';
+		duration = 'unlimited'; 
 	var urlS = serverBCK+'/direct?type=email&uuid='+uuid+'&email='+email+'&role='+role+'&l='+level+'&d='+duration+'&sharerole='+sharerole;
 	$.ajax({
 		type : "POST",
@@ -2169,9 +2150,9 @@ function imageHTML(image)
 
 
 //==================================
-String.prototype.containsArrayElt = function (rolesarray)
+String.prototype.containsArrayElt = function (rolesarray) 
 //==================================
-	// usage : if (editnoderoles.containsArrayElt(g_userroles))
+	// usage : if (editnoderoles.containsArrayElt(g_userroles)) 
 {
 	var result = false;
 	for (var i=0;i<rolesarray.length;i++){
@@ -2467,10 +2448,10 @@ function displayTechSupportForm(langcode)
 }
 
 //==================================
-function convertDot2Dash(text)
+function convertDot2Dash(text) 
 //==================================
 {
-	return text.replace(/\./g, '-');
+	return text.replace(/\./g, '-'); 
 }
 
 
@@ -2539,7 +2520,7 @@ function applyKarutaConfiguration()
 	var root = document.documentElement;
 	if (g_configVar['font-standard']!=undefined && g_configVar['font-standard']!="")
 		root.style.setProperty('--font-family',g_configVar['font-standard'] + ", Helvetica, Arial, sans-serif");
-	if (g_configVar['font-size-coeff']!=undefined && g_configVar['font-size-coeff']!="")
+	if (g_configVar['font-size-coeff']!=undefined && g_configVar['font-size-coeff']!="") 
 		root.style.setProperty('--font-size-coeff',g_configVar['font-size-coeff']);
 	if (g_configVar['font-google']!=undefined && g_configVar['font-google']!="") {
 		$("#font-family").attr("href","https://fonts.googleapis.com/css?family="+g_configVar['font-google']);
@@ -2777,7 +2758,7 @@ function autocomplete(input,arrayOfValues,onupdate,self,langcode) {
 //==================================
 function addautocomplete(input,arrayOfValues,onupdate,self,langcode)
 //==================================
-{
+{	
 	if (input!=null) {
 		var currentFocus;
 		input.addEventListener("input", function(e) {
@@ -2863,27 +2844,32 @@ function addautocomplete(input,arrayOfValues,onupdate,self,langcode)
 function replaceVariable(text,node,withquote)
 //==================================
 {
+	let quote = "'";
 	if (withquote==null)
 		withquote = true;
+	if (!withquote)
+		quote = "";
+	//-------------------------
 	if (text!=undefined && text!="" && text.indexOf("++")>-1) // replacement in menus
 		text = text.replaceAll("++","&&");
+	//-----------------------------------------------------------------------------------------
 	if (text!=undefined && text!="" && text.indexOf("##")>-1) { // text contains variables
 		if (text.indexOf("##pagecode##")>-1){
 			const pageid = $("#page").attr('uuid');
 			const pagecode = UICom.structure.ui[pageid].getCode();
 			text = text.replaceAll('##pagecode##',cleanCode(pagecode));
 		}
+		//-----------
 		if (text.indexOf("##pageid##")>-1){
 			const pageid = $("#page").attr('uuid');
-			if (withquote && text.indexOf('##current')>-1)
-				text = text.replaceAll('##pageid##',"'"+pageid+"'");
-			else
-				text = text.replaceAll('##pageid##',pageid);
+			text = text.replaceAll('##pageid##',quote+pageid+quote);
 		}
+		//-------------
 		if (text.indexOf("##today-utc##")>-1)
 			text = text.replaceAll('##today-utc##',new Date().getTime());
 		if (text.indexOf("##today##")>-1)
 			text = text.replaceAll('##today##',new Date().toLocaleString());
+		//-------------
 		if (text!=undefined && text.indexOf('lastimported')>-1) {
 			text = text.replaceAll('##lastimported-1##',"g_importednodestack[g_importednodestack.length-2]");
 			text = text.replaceAll('##lastimported-2##',"g_importednodestack[g_importednodestack.length-3]");
@@ -2891,53 +2877,43 @@ function replaceVariable(text,node,withquote)
 			text = text.replaceAll('##lastimported-4##',"g_importednodestack[g_importednodestack.length-5]");
 			text = text.replaceAll('##lastimported##',"g_importednodestack[g_importednodestack.length-1]");
 		}
-		else if (text!=undefined && text.indexOf('##currentportfolio##')>-1) {
+		//-------------
+		if (text.indexOf('##currentportfolio')>-1) {
 			text = text.replaceAll('##currentportfolio##',portfolios_byid[portfolioid_current].code_node.text());
+			text = text.replaceAll('##currentportfoliocode##',portfolios_byid[portfolioid_current].code_node.text());
 		}
-		if (node!=null && node!=undefined && text!=undefined) {
+		//-------------
+		if (node!=null && node!=undefined) {
 			//--------- currentnode--------------
-			if (withquote && text.indexOf('##current')>-1) {
+			if (text.indexOf('##current')>-1) {
 				text = text.replaceAll('##currentnode##',"'"+node.id+"'");
-				text = text.replaceAll('##currentcode##',"'"+$($("code",$("asmResource[xsi_type!='context'][xsi_type!='nodeRes']",node.node))).text()+"'");
-			}
-			if (!withquote && text.indexOf('##current')>-1) {
-				text = text.replaceAll('##currentnode##',node.id);
 				if (node.asmtype=='asmContext')
-					text = text.replaceAll('##currentcode##',$($("code",$("asmResource[xsi_type!='context'][xsi_type!='nodeRes']",node.node))[0]).text());
+					text = text.replaceAll('##currentcode##',quote+$($("code",$("asmResource[xsi_type!='context'][xsi_type!='nodeRes']",node.node))[0]).text()+quote);
 				else
-					text = text.replaceAll('##currentcode##',$($("code",$("asmResource[xsi_type='nodeRes']",node.node))[0]).text());
+					text = text.replaceAll('##currentcode##',quote+$($("code",$("asmResource[xsi_type='nodeRes']",node.node))[0]).text()+quote);
 			}
 			//--------- parentcode--------------
-			if (withquote && text.indexOf('##parentnode##')>-1)
+			if (text.indexOf('##parentnode##')>-1)
 				if (node.node!=undefined)
-					text = text.replaceAll('##parentnode##',"'"+$(node.node).parent().attr('id')+"'");
+					text = text.replaceAll('##parentnode##',quote+$(node.node).parent().attr('id')+quote);
 				else
-					text = text.replaceAll('##parentnode##',"'"+$(node).parent().attr('id')+"'");
-			if (!withquote && text.indexOf('##parentnode##')>-1)
+					text = text.replaceAll('##parentnode##',quote+$(node).parent().attr('id')+quote);
+			if (text.indexOf('##parentparentnode##')>-1)
 				if (node.node!=undefined)
-					text = text.replaceAll('##parentnode##',$(node.node).parent().attr('id'));
+					text = text.replaceAll('##parentparentnode##',quote+$(node.node).parent().parent().attr('id')+quote);
 				else
-					text = text.replaceAll('##parentnode##',$(node).parent().attr('id'));
-			//--------- parentcode--------------
-			if (withquote && text.indexOf('##parentparentnode##')>-1)
-				if (node.node!=undefined)
-					text = text.replaceAll('##parentparentnode##',"'"+$(node.node).parent().parent().attr('id')+"'");
-				else
-					text = text.replaceAll('##parentparentnode##',"'"+$(node).parent().parent().attr('id')+"'");
-			if (!withquote && text.indexOf('##parentparentnode##')>-1)
-				if (node.node!=undefined)
-					text = text.replaceAll('##parentparentnode##',$(node.node).parent().parent().attr('id'));
-				else
-					text = text.replaceAll('##parentparentnode##',$(node).parent().parent().attr('id'));
+					text = text.replaceAll('##parentparentnode##',quote+$(node).parent().parent().attr('id')+quote);
 			//--------- itselfrescode--------------
-			if (withquote && text.indexOf('##itselfrescode##')>-1)
-				text = text.replaceAll('##itselfrescode##',"'"+$($("code",$("asmResource[xsi_type!='context'][xsi_type!='nodeRes']",node.node))).text()+"'");
-
+			if (text.indexOf('##itselfrescode##')>-1)
+				text = text.replaceAll('##itselfrescode##',quote+$($("code",$("asmResource[xsi_type!='context'][xsi_type!='nodeRes']",node.node))).text()+quote);
+	
 		}
-		if (text!=undefined && (text.indexOf('##userlogin##')>-1 || text.indexOf('##accountlogin##')>-1)) {
+		//-------------
+		if (text.indexOf('##userlogin##')>-1 || text.indexOf('##accountlogin##')>-1) {
 			text = text.replaceAll('##userlogin##',USER.username);
 			text = text.replaceAll('##accountlogin##',USER.username);
 		}
+		//-------------
 		var n=0;
 		while (text!=undefined && text.indexOf("{##")>-1 && n<100) {
 			var test_string = text.substring(text.indexOf("{##")+3); // test_string = abcd{##variable##}efgh.....
@@ -2946,6 +2922,8 @@ function replaceVariable(text,node,withquote)
 				text = text.replace("{##"+variable_name+"##}", g_variables[variable_name]);
 			n++; // to avoid infinite loop
 		}
+		//-------------
+		n = 0;
 		while (text!=undefined && text.indexOf("##")>-1 && n<100) {
 			var test_string = text.substring(text.indexOf("##")+2); // test_string = abcd##variable##efgh.....
 			var variable_name = test_string.substring(0,test_string.indexOf("##"));
@@ -2961,6 +2939,7 @@ function replaceVariable(text,node,withquote)
 			n++; // to avoid infinite loop
 		}
 	}
+	//-----------------------------------------------------------------------------------------
 	return text;
 }
 
@@ -2979,7 +2958,7 @@ function addParentCode (parentid) {
 			var nodecode_parts = nodecode.split("*");
 			if (parentcode_parts[parentcode_parts.length-1]==nodecode_parts[0]) {
 				newcode = "";
-				for (var j=1;j<nodecode_parts.length;j++)
+				for (var j=1;j<nodecode_parts.length;j++) 
 					newcode += nodecode_parts[j] + ((j==nodecode_parts.length-1)?"" : "*");
 			}
 			//-------------------
@@ -3111,7 +3090,7 @@ function selectElts(type,list)
 //=====================================================================================================
 
 //==================================
-function copyInclipboad(id)
+function copyInclipboad(id) 
 //==================================
 {
 	var element = document.getElementById("pcode_"+id);
@@ -3364,7 +3343,7 @@ function majcodenum (node) {
 function sortTable (tableid)
 //==================================
 {
-
+	
 	// adapted from Pierre Giraud - www.pierre-giraud.com
 	const compare = function(ids, asc){
 		return function(row1, row2){
@@ -3453,7 +3432,7 @@ function toggleDraft (nodeid)
 		UICom.UpdateMetadata(node.id);
 		node.semantictag = semtag;
 		node.refresh();
-		if (g_userroles[0]=='designer' || USER.admin) {
+		if (g_userroles[0]=='designer' || USER.admin) {  
 			node.displayMetainfo("metainfo_"+node.id);
 		}
 	} else {
@@ -3462,7 +3441,7 @@ function toggleDraft (nodeid)
 		UICom.UpdateMetadata(node.id);
 		node.semantictag = semtag;
 		node.refresh();
-		if (g_userroles[0]=='designer' || USER.admin) {
+		if (g_userroles[0]=='designer' || USER.admin) {  
 			node.displayMetainfo("metainfo_"+node.id);
 		}
 	}
@@ -3781,9 +3760,9 @@ function decode(s) {
 }
 
 function toggleCheckboxMultiple(obj) {
-	if (obj.checked)
+	if (obj.checked) 
 		$('input[name*=multiple]').prop('checked', true);
-	else
+	else 
 		$('input[name*=multiple]').prop('checked', false)
 }
 
@@ -3904,7 +3883,7 @@ function testCodeNotEmpty(semtag,uuid) {
 		uuid = $("#page").attr('uuid');
 	const nodes = $("*:has(>metadata[semantictag*="+semtag+"])",UICom.structure.ui[uuid].node);
 	if ($("asmResource",nodes[0]).length==3) {
-		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]);
+		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]); 
 	} else {
 		resource = $("asmResource[xsi_type='nodeRes']",nodes[0]);
 	}
@@ -3916,7 +3895,7 @@ function testCodeEmpty(semtag,uuid) {
 		uuid = $("#page").attr('uuid');
 	const nodes = $("*:has(>metadata[semantictag*="+semtag+"])",UICom.structure.ui[uuid].node);
 	if ($("asmResource",nodes[0]).length==3) {
-		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]);
+		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]); 
 	} else {
 		resource = $("asmResource[xsi_type='nodeRes']",nodes[0]);
 	}
@@ -3948,7 +3927,7 @@ function getCode(semtag,uuid) {
 		uuid = $("#page").attr('uuid');
 	const nodes = $("*:has(>metadata[semantictag*="+semtag+"])",UICom.structure.ui[uuid].node);
 	if ($("asmResource",nodes[0]).length==3) {
-		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]);
+		resource = $("asmResource[xsi_type!='nodeRes'][xsi_type!='context']",nodes[0]); 
 	} else {
 		resource = $("asmResource[xsi_type='nodeRes']",nodes[0]);
 	}
@@ -4109,7 +4088,7 @@ $.fn.hasAttr = function (options)
 //=====================================
 {
 	var defaults= {"attribute":"id","meta":"metadata"};
-	var parameters = $.extend(defaults, options);
+	var parameters = $.extend(defaults, options); 
 	return this.each(function() {
 		if ($(">"+parameters.meta,this).attr(parameters.attribute) != undefined)
 			return $(this);
@@ -4310,7 +4289,7 @@ $.fn.test_nodeLabelContains = function (options) { return result = ($(this).node
 //=====================================
 
 //=====================================
-$.fn.nodeValueContains = function (options)
+$.fn.nodeValueContains = function (options)  
 //=====================================
 {
 	var defaults= { "value":"v","function":""};
@@ -4324,7 +4303,7 @@ $.fn.test_nodeValueContains = function (options) { return result = ($(this).node
 //=====================================
 
 //=====================================
-$.fn.utcBetween = function (options)
+$.fn.utcBetween = function (options)  
 //=====================================
 {
 	var result = [];
@@ -4346,14 +4325,14 @@ $.fn.test_utcBetween = function (options) { return result = ($(this).utcBetween(
 //=====================================
 
 //=====================================
-$.fn.utcGreater = function (options)
+$.fn.utcGreater = function (options)  
 //=====================================
 {
 	var result = [];
 	var defaults= {"semtag":"s","min":"m"};
 	var parameters = $.extend(defaults, options);
 	for (let i=0;i<this.length;i++){
-		var node = $("asmContext:has('>metadata[semantictag*=" + parameters.semtag + "]')",this[i]);
+		var node = $("asmContext:has('>metadata[semantictag*=" + parameters.semtag + "]')",this[i]);		
 		var utc = $("utc",node).text();
 		if (replaceVariable(parameters.min) < utc)
 			result.push(this[i])
@@ -4364,14 +4343,14 @@ $.fn.test_utcGreater = function (options) { return result = ($(this).utcGreater(
 //=====================================
 
 //=====================================
-$.fn.utcLower = function (options)
+$.fn.utcLower = function (options)  
 //=====================================
 {
 	var result = [];
 	var defaults= {"semtag":"s","max":"M"};
 	var parameters = $.extend(defaults, options);
 	for (let i=0;i<this.length;i++){
-		var node = $("asmContext:has('>metadata[semantictag*=" + parameters.semtag + "]')",this[i]);
+		var node = $("asmContext:has('>metadata[semantictag*=" + parameters.semtag + "]')",this[i]);		
 		var utc = $("utc",node).text();
 		if (utc < replaceVariable(parameters.max))
 			result.push(this[i])
@@ -4403,7 +4382,7 @@ $.fn.invsortOnChildSemtag = function (options)
 };
 
 //=====================================
-$.fn.hasChildSubmitted = function (options)
+$.fn.hasChildSubmitted = function (options)  
 //=====================================
 {
 	var result = [];
@@ -4419,7 +4398,7 @@ $.fn.hasChildSubmitted = function (options)
 $.fn.test_hasChildSubmitted = function (options) { return result = ($(this).hasChildSubmitted(options).length>0) ? true : false;};
 
 //=====================================
-$.fn.hasChildNotSubmitted = function (options)
+$.fn.hasChildNotSubmitted = function (options)  
 //=====================================
 {
 	var result = [];
