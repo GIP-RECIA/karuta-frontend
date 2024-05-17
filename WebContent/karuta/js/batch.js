@@ -138,7 +138,7 @@ function getTxtvalsWithoutReplacement(node)
 			if (select.indexOf('function(')>-1) {
 				fct = select.substring(9,select.indexOf(','))
 				select = select.substring(select.indexOf(',')+1,select.indexOf(')'))
-			}
+			}			
 			//---------- text ------
 			if (select.indexOf("//")>-1) {
 				if (select=="//today")
@@ -156,7 +156,7 @@ function getTxtvalsWithoutReplacement(node)
 			//---------- function ---
 			if (fct!=null) {
 				if (select.indexOf("###")>-1)
-					select = replaceBatchVariable(select);
+				select = replaceBatchVariable(select);
 				text = eval(fct+"('"+select+"')");
 			}
 			//-------------
@@ -222,7 +222,7 @@ function getvarvals(node)
 						text = eval("g_json."+select.substring(2));
 				} else if (items[i].indexOf("/")>-1)
 					text = eval("g_json.lines["+g_noline+"]."+items[i].substring(1));
-				else
+				else 
 					text = items[i];
 			//---------- function ---
 				if (fct!=null)
@@ -273,7 +273,7 @@ function getTargetUrl(node)
 			treeref = replaceVariable(treeref);
 		url = serverBCK_API+"/nodes/node/"+treeref;
 	} else if (treeref.indexOf("#")>-1)
-		url = serverBCK_API+"/nodes?portfoliocode=" + treeref.substring(1) + "&semtag="+semtag;
+		url = serverBCK_API+"/nodes?portfoliocode=" + treeref.substring(1) + "&semtag="+semtag;	
 	else
 		url = serverBCK_API+"/nodes?portfoliocode=" + g_trees[treeref][1] + "&semtag="+semtag;
 	return url;
@@ -327,7 +327,7 @@ function getSourceUrl(node)
 		if (treeref!='#none')
 			url = serverBCK_API+"/nodes/node/"+treeref;
 	} else if (treeref.indexOf("#")>-1)
-		url = serverBCK_API+"/nodes?portfoliocode=" + treeref.substring(1) + "&semtag="+semtag;
+		url = serverBCK_API+"/nodes?portfoliocode=" + treeref.substring(1) + "&semtag="+semtag;	
 	else
 		url = serverBCK_API+"/nodes?portfoliocode=" + g_trees[treeref][1] + "&semtag="+semtag;
 	return url;
@@ -489,16 +489,16 @@ function processListActions(list)
 			var else_actions = $($('>else-part',actionnode)[0]).children();
 			var actiontype = $(if_action).prop("nodeName");
 			var actionnode = if_action;
-			$("#batch-log").append("<br>================ IF ===============================");
+			$("#batch-log").append("<br>================ IF ===============================");			
 			if (g_actions[actiontype](actionnode)){
-				$("#batch-log").append("<br>================ THEN =============================");
+				$("#batch-log").append("<br>================ THEN =============================");			
 				processListActions(then_actions);
 			}
 			else {
-				$("#batch-log").append("<br>================ ELSE =============================");
+				$("#batch-log").append("<br>================ ELSE =============================");			
 				processListActions(else_actions);
 			}
-			$("#batch-log").append("<br>================ END IF ============================");
+			$("#batch-log").append("<br>================ END IF ============================");			
 		}
 	}
 };
@@ -653,7 +653,7 @@ g_actions['create-user'] = function createUser(node)
 					$("#batch-log").append("<br>- user updated("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 				},
 				error : function(data) {
-					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 1</span> in create/update-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
+					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 1</span> in create/update-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);					
 				}
 			});
 			},
@@ -684,14 +684,14 @@ g_actions['create-user'] = function createUser(node)
 				success : function(data) {
 					userid = data;
 					if ($("user",data).length==0) {
-						$("#batch-log").append("<br>- ***<span class='danger'>ERROR 2</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
+						$("#batch-log").append("<br>- ***<span class='danger'>ERROR 2</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);					
 					} else {
 						ok = true;
 						$("#batch-log").append("<br>- user created("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
 					}
 				},
 				error : function(data) {
-					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 3</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);
+					$("#batch-log").append("<br>- ***<span class='danger'>ERROR 3</span> in create-user ("+userid+") - identifier:"+identifier+" lastname:"+lastname+" firstname:"+firstname);					
 				}
 			});
 		}
@@ -1167,7 +1167,7 @@ g_actions['delete-tree'] = function deleteTree(node)
 			});
 		} else {
 			$("#batch-log").append("<br>- ***<span class='danger'>ERROR 2</span> delete tree - portfolioid:"+portfolioid+" ---- NOT FOUND ----");
-		}
+		}	
 	}
 	catch(err) {
 		$("#batch-log").append("<br>- ***<span class='danger'>ERROR 3</span> delete tree - portfolioid:"+portfolioid+" ---- NOT FOUND ----");
@@ -1195,7 +1195,7 @@ g_actions['refresh-tree-url2unit'] = function refreshTreeURL2Unit(node)
 			$("#batch-log").append("<br>- tree-url2unit refreshed - portfolioid:"+portfolioid);
 		} else {
 			$("#batch-log").append("<br>- ***<span class='danger'>ERROR</span> tree-url2unit - portfolioid:"+portfolioid+" ---- NOT FOUND ----");
-		}
+		}	
 	}
 	catch(err) {
 		$("#batch-log").append("<br>- ***<span class='danger'>ERROR</span> tree-url2unit refreshed -portfolioid:"+portfolioid+" ---- NOT FOUND ----");
@@ -1223,7 +1223,7 @@ g_actions['refresh-tree-url2portfolio'] = function refreshTreeURL2Portfolio(node
 			$("#batch-log").append("<br>- tree-url2portfolio refreshed - portfolioid:"+portfolioid);
 		} else {
 			$("#batch-log").append("<br>- ***<span class='danger'>ERROR</span> tree-url2portfolio - portfolioid:"+portfolioid+" ---- NOT FOUND ----");
-		}
+		}	
 	}
 	catch(err) {
 		$("#batch-log").append("<br>- ***<span class='danger'>ERROR</span> tree-url2portfolio refreshed -portfolioid:"+portfolioid+" ---- NOT FOUND ----");
@@ -1351,12 +1351,12 @@ g_actions['select-tree'] = function selectTree(node)
 		code = getTxtvals($("code",node));
 	//----- get tree id -----
 	var portfolioid = "";
-	if (code=='self') {
+	if (code=='self') { 
 		portfolioid = g_portfolioid;
 		code = $("code",$("asmRoot>asmResource[xsi_type='nodeRes']",g_portfolio_current)).text();
 	} else
-		portfolioid = UIFactory["Portfolio"].getid_bycode(code,false);
-
+		portfolioid = UIFactory["Portfolio"].getid_bycode(code,false); 
+	
 	//------------------------
 	if (portfolioid!=""){
 		ok = true;
@@ -1499,7 +1499,7 @@ g_actions['update-tree-root'] = function updateTreeRoot(node)
 								if (newportfolio_code==newcode && j==LANGCODE && label!="")
 									xml += "<label lang='"+languages[j]+"'>"+label+"</label>";
 								else
-									xml +=" <label lang='"+languages[j]+"'>"+ $("label[lang='"+languages[j]+"']",$("asmRoot>asmResource[xsi_type='nodeRes']",items[i])[0]).text()+"</label>";
+									xml +=" <label lang='"+languages[j]+"'>"+ $("label[lang='"+languages[j]+"']",$("asmRoot>asmResource[xsi_type='nodeRes']",items[i])[0]).text()+"</label>";	
 								}
 								xml +="</asmResource>";
 								strippeddata = xml.replace(/xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\"/g,"");  // remove xmlns attribute
@@ -2116,9 +2116,9 @@ g_actions['share-portfoliogroup'] = function sharePortfolioGroup(node)
 							});
 						}
 					} else {
-						$("#batch-log").append("<br>- <span class='danger'>ERROR</span> - portfoliogroup : "+portfoliogroup+" is EMPTY");
+						$("#batch-log").append("<br>- <span class='danger'>ERROR</span> - portfoliogroup : "+portfoliogroup+" is EMPTY");				
 					}
-				},
+				},		
 				error : function(data) {
 					$("#batch-log").append("<br>- <span class='danger'>ERROR</span> Portfoliogroup does not exist - portfoliogroup:"+portfoliogroup);
 				}
@@ -2193,9 +2193,9 @@ g_actions['unshare-portfoliogroup'] = function unsharePortfolioGroup(node)
 							});
 						}
 					} else {
-						$("#batch-log").append("<br>- <span class='danger'>ERROR</span> - portfoliogroup : "+portfoliogroup+" is EMPTY");
+						$("#batch-log").append("<br>- <span class='danger'>ERROR</span> - portfoliogroup : "+portfoliogroup+" is EMPTY");				
 					}
-				},
+				},		
 				error : function(data) {
 					$("#batch-log").append("<br>- <span class='danger'>ERROR</span> Portfoliogroup does not exist - portfoliogroup:"+portfoliogroup);
 				}
@@ -2225,7 +2225,7 @@ g_actions['share-usergroup'] = function shareUserGroup(node)
 	var role = getTxtvals($("role",node));
 	var usergroupname = getTxtvals($("groupname",node));
 	var usergroupid = get_usergroupid(usergroupname);
-
+	
 	$.ajax({
 		async : false,
 		type : "GET",
@@ -2422,9 +2422,9 @@ g_actions['share-groups'] = function shareGroups(node)
 					}
 				});
 			} else {
-				$("#batch-log").append("<br>- <span class='danger'>ERROR</span>  - Portfoliogroup is empty - portfoliogroup:"+portfoliogroup);
+				$("#batch-log").append("<br>- <span class='danger'>ERROR</span>  - Portfoliogroup is empty - portfoliogroup:"+portfoliogroup);				
 			}
-		},
+		},		
 		error : function(data) {
 			$("#batch-log").append("<br>- <span class='danger'>ERROR</span> Portfoliogroup does not exist - portfoliogroup:"+portfoliogroup);
 		}
@@ -2534,7 +2534,7 @@ g_actions['update-node-resource'] = function updateResource(node,data)
 			if (code!="")
 				$("code",resource).text(code);
 			if (label!="") {
-
+				
 				if ($("metadata",nodes[i]).attr("multilingual-node")=="Y") {
 					$("label[lang='"+LANG+"']",resource).text(label);
 				} else {
@@ -3101,7 +3101,7 @@ g_actions['update-proxy'] = function update_proxy(node,data)
 	//------------ Target --------------------
 	const nodes = getTargetNodes(node,data,"dest-test");
 	//----------------------------------------
-	if (nodes.length>0){
+	if (nodes.length>0){	
 		for (i=0; i<nodes.length; i++){
 			ok++;
 			var targetid = $(nodes[i]).attr('id');
@@ -3154,7 +3154,7 @@ g_actions['update-url2unit'] = function update_url2unit(node,data)
 	//------------ Target --------------------
 	const nodes = getTargetNodes(node,data,"dest-test");
 	//----------------------------------------
-	if (nodes.length>0){
+	if (nodes.length>0){	
 			for (i=0; i<nodes.length; i++){
 				ok++;
 				var targetid = $(nodes[i]).attr('id');
@@ -3208,7 +3208,7 @@ g_actions['update-url2portfolio'] = function update_url2portfolio(node,data)
 	//------------ Target --------------------
 	const nodes = getTargetNodes(node,data,"dest-test");
 	//----------------------------------------
-	if (nodes.length>0){
+	if (nodes.length>0){	
 			for (let i=0; i<nodes.length; i++){
 				var targetid = $(nodes[i]).attr('id');
 				//----- get target ----------------
@@ -3345,7 +3345,7 @@ g_actions['batch-variable'] = function (node)
 		//------------  --------------------
 		var url = "";
 		if (srce_treeref.indexOf("#")>-1)
-			url = serverBCK_API+"/nodes?portfoliocode=" + srce_treeref.substring(1) + "&semtag="+srce_semtag;
+			url = serverBCK_API+"/nodes?portfoliocode=" + srce_treeref.substring(1) + "&semtag="+srce_semtag;	
 		else
 			url = serverBCK_API+"/nodes?portfoliocode=" + g_trees[srce_treeref][1] + "&semtag="+srce_semtag;
 		//--------------------------------
@@ -3378,7 +3378,7 @@ g_actions['batch-variable'] = function (node)
 		//---------- node-resource -----------
 		if (select=='resource') {
 			text = UICom.structure.ui[nodeid].resource.getView("dashboard_"+nodeid,null,null,true);
-
+			
 		}
 		else if (select=='resource code') {
 			text = UICom.structure.ui[nodeid].resource.getCode();
@@ -3481,7 +3481,7 @@ g_actions['for-each-node'] = function (node)
 		//------------  --------------------
 		var url = "";
 		if (srce_treeref.indexOf("#")>-1)
-			url = serverBCK_API+"/nodes?portfoliocode=" + srce_treeref.substring(1) + "&semtag="+srce_semtag;
+			url = serverBCK_API+"/nodes?portfoliocode=" + srce_treeref.substring(1) + "&semtag="+srce_semtag;	
 		else
 			url = serverBCK_API+"/nodes?portfoliocode=" + g_trees[srce_treeref][1] + "&semtag="+srce_semtag;
 		//--------------------------------
@@ -3520,7 +3520,7 @@ g_actions['for-each-node'] = function (node)
 							$("#batch-log").append("<br>- ***NOT FOUND <span class='danger'>ERROR - for-each-node "+srce_semtag+"</span>");
 						}
 					});
-
+					
 				}
 			},
 			error : function() {
@@ -3543,7 +3543,7 @@ g_actions['for-each-node'] = function (node)
 function processCode()
 //=================================================
 {
-
+	
 	g_json = {};
 	g_json['lines'] = [];
 	g_json['lines'][0] = 'no_json';// there is no json
@@ -3762,7 +3762,7 @@ function execReport_BatchCSV(parentid,targetid,title,codeReport,display)
 		if (display)
 			display_execBatch()
 		//------------------------------
-		getModelAndProcess(g_json.model_code);
+		getModelAndProcess(g_json.model_code);		
 		UIFactory.Node.reloadUnit();
 	} else  {
 		alertHTML("No report data for batch execution!");
@@ -4142,7 +4142,7 @@ g_actions['fen-batch-variable'] = function (node,data)
 		//---------- node-resource -----------
 		if (select=='resource') {
 			text = UICom.structure.ui[nodeid].resource.getView("dashboard_"+nodeid,null,null,true);
-
+			
 		}
 		else if (select=='resource code') {
 			text = UICom.structure.ui[nodeid].resource.getCode();
