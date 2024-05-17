@@ -3979,6 +3979,11 @@ function confirmSubmitAndChangeVisibility(nodeid,path,value){
 //================================================
 //================================================
 
+function sanitizeText(text) {
+	text= text.replace(/<script.*?>[\s\S]*?<\/.*?script>/gi,"");
+	text= text.replace(/javascript.*:[^"]*/gi,"");
+	return text;
+}
 
 function getPreviewSharedURL(uuid,sharerole,level,duration,role) {
 	const urlS = serverBCK+'/direct?uuid='+uuid+'&role='+role+'&showtorole='+role+'&l='+level+'&d='+duration+'&sharerole='+sharerole+'&type=showtorole';
