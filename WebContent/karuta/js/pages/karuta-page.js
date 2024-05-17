@@ -87,7 +87,6 @@ function displayKarutaPage()
 			html += "<div id='main-exec-batch' class='container-fluid' style='display:none'></div>";
 			html += "<div id='main-exec-report' class='container-fluid' style='display:none'></div>";
 			$("#main-container").html(html);
-/*
 			$.ajax({
 				type: "GET",
 				dataType: "json",
@@ -98,7 +97,6 @@ function displayKarutaPage()
 					karuta_fileserver_date = data.buildTime;
 				}
 			});
-*/
 			$.ajax({
 				type : "GET",
 				dataType : "json",
@@ -156,9 +154,9 @@ function displayKarutaPage()
 						});
 					}
 				});
-			} else 
+			} else
 				display_list_page();
-			
+
 			//-------------------------------
 		},
 		error : function(jqxhr,textStatus) {
