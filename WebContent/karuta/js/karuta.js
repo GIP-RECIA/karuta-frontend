@@ -148,6 +148,10 @@ function getNavBar(type,portfolioid,edit)
 		html += "	<div class='dropdown-menu versions' aria-labelledby='navbar-brand-logo'>";
 		html += "		<a class='dropdown-item'><b>Versions</b></a>";
 		html += "		<div class='dropdown-divider'></div>";
+		if (karuta_version=='@project.version@' && typeof karuta_version_eportfolium!='undefined') {
+			karuta_version = karuta_version_eportfolium;
+			karuta_date = karuta_date_eportfolium;
+		}
 		html += "		<a class='dropdown-item'>Karuta-frontend : "+karuta_version+" (" +karuta_date+")</a>";
 		html += "		<a class='dropdown-item'>Karuta-backend : "+karuta_backend_version+" (" +karuta_backend_date+")</a>";
 		html += "		<a class='dropdown-item'>Karuta-fileserver : "+karuta_fileserver_version+" (" +karuta_fileserver_date+")</a>";
@@ -4246,15 +4250,15 @@ $.fn.test_hasNotChildSemtagAndResourceTextContains = function (options) { return
 $.fn.hasChildSemtagAndResourceTextNotEmpty = function (options)
 //=====================================
 {
-	var defaults= {"semtag":"s","value":"v","function":""};
+	var defaults= {"semtag":"s","function":""};
 	var parameters = $.extend(defaults, options);
 	var result = $(this).has("*:has('>metadata[semantictag*=" + parameters.semtag + "]'):has(\">asmResource[xsi_type!='context'][xsi_type!='nodeRes']>text[lang='"+languages[LANGCODE]+"']:not(:empty)\")");
 	if (parameters.function!="")
 		result = eval("$(result)."+parameters.function);
 	return $(result);
 };
-$.fn.test_hasChildSemtagAndResourceTextNotContains = function (options) { return result = ($(this).hasChildSemtagAndResourceTextContains(options).length>0) ? true : false;};
-$.fn.test_hasNotChildSemtagAndResourceTextNotContains = function (options) { return result = ($(this).hasChildSemtagAndResourceTextContains(options).length>0) ? false : true;};
+$.fn.test_hasChildSemtagAndResourceTextNotEmpty = function (options) { return result = ($(this).hasChildSemtagAndResourceTextContains(options).length>0) ? true : false;};
+$.fn.test_hasNotChildSemtagAndResourceTextNotEmpty = function (options) { return result = ($(this).hasChildSemtagAndResourceTextContains(options).length>0) ? false : true;};
 //=====================================
 
 //=====================================
